@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anish Chaudhary — Graphic & Motion Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+
+</head>
+<body>
+
+<!-- ── NOISE ───────────────────── -->
+<div id="noise" aria-hidden="true"></div>
+
+<!-- ── PRELOADER ──────────────── -->
+<div id="preloader" aria-hidden="true">
+  <div>
+    <div class="pl-name">Anish Chaudhary</div>
+    <div class="pl-sub">Graphic · Motion · Video</div>
+  </div>
+  <div class="pl-bar-wrap">
+    <div class="pl-pct" id="plPct">0%</div>
+    <div class="pl-track"><div class="pl-fill" id="plFill"></div></div>
+  </div>
+  <div class="pl-status" id="plStatus">Initializing experience</div>
+  <div class="pl-door pl-door-l" id="doorL"></div>
+  <div class="pl-door pl-door-r" id="doorR"></div>
+</div>
+
+<!-- ── CURSOR ─────────────────── -->
+<div id="cur-ring" aria-hidden="true"></div>
+<div id="cur-dot"  aria-hidden="true"></div>
+<div id="cur-lbl"  aria-hidden="true">View</div>
+
+<!-- ── DARK MODE TOGGLE ───────── -->
+<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+
+<!-- ── SUCCESS DIALOG ─────────── -->
+<div id="success-overlay" role="dialog" aria-modal="true" aria-label="Message sent">
+  <div class="success-card">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="success-title">Message Sent! 🎉</div>
+    <div class="success-msg">
+      Thank you for reaching out! I've received your message and will get back to you as soon as possible.
+    </div>
+    <div class="success-bar"><div class="success-bar-fill"></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="three-canvas" aria-hidden="true"></canvas>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="blob blob-p" style="width:50vw;height:50vw;top:-15%;left:-10%" aria-hidden="true"></div>
+  <div class="blob blob-c" style="width:38vw;height:38vw;top:25%;right:-8%" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <div class="hero-eye" id="heroEye">Available for freelance · Kathmandu, Nepal</div>
+    <h1 class="hero-h1" aria-label="Hi I'm Anish Chaudhary">
+      <span class="ln"><span class="wd">Hi,&nbsp;</span><span class="wd">I'm</span></span>
+      <span class="ln"><span class="wd gp">Anish</span></span>
+      <span class="ln"><span class="wd">Chaudhary</span></span>
+    </h1>
+    <p class="hero-roles" id="heroRoles">
+      <span class="typing">Graphic Designer | Motion Designer | Video Editor</span>
+    </p>
+    <div class="hero-ctas" id="heroCtas">
+      <a href="#portfolio" class="btn-p magnetic">View Projects <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="mailto:anishchy23@gmail.com" class="btn-o magnetic">Hire Me <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 3.5l6 5 6-5M1 3.5h12v8H1z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="hero-stats" id="heroStats">
+    <div><div class="hs-num" data-c="50">0</div><div class="hs-lbl">Projects Done</div></div>
+    <div><div class="hs-num" data-c="3">0</div><div class="hs-lbl">Years Exp</div></div>
+    <div><div class="hs-num" data-c="3">0</div><div class="hs-lbl">Companies</div></div>
+  </div>
+  <div class="scroll-hint" id="scrollHint"><div class="mouse"></div><span>Scroll</span></div>
+</section>
+
+<!-- ── MARQUEE ────────────────── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="mq-row fwd" id="mq1"></div>
+  <div class="mq-row rev" id="mq2"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     ABOUT
+══════════════════════════════════════ -->
+<section id="about">
+  <div class="blob blob-p" style="width:40vw;height:40vw;bottom:-20%;right:-15%;opacity:.2" aria-hidden="true"></div>
+  <div class="s-label rv"><span>01</span>About Me</div>
+  <h2 class="s-title rv">Turning ideas into<br><span class="gp">visual stories.</span></h2>
+  <div class="about-grid">
+    <div class="glass about-card rv rv-d1">
+      <p>I'm <strong>Anish Chaudhary</strong>, a passionate graphic designer, motion designer, and video editor based in <strong>Kathmandu, Nepal</strong>. I craft compelling visuals that communicate stories, evoke emotions, and leave lasting impressions.</p>
+      <p>With expertise spanning <strong>brand identity</strong>, social media design, <strong>motion graphics</strong>, and video production, I bring a holistic creative approach to every project.</p>
+      <p>My work has spanned across <strong>news media</strong>, educational institutions, and <strong>technology companies</strong> — always pushing the boundaries of visual communication.</p>
+      <div class="badges">
+        <span class="badge">Brand Identity</span>
+        <span class="badge">Motion Design</span>
+        <span class="badge">Video Editing</span>
+        <span class="badge">Print Design</span>
+        <span class="badge">Social Media</span>
+        <span class="badge">Typography</span>
+        <span class="badge">Art Direction</span>
+      </div>
+    </div>
+    <div class="timeline rv rv-d2">
+      <div class="tl-item">
+        <div class="tl-year">2023 — Present</div>
+        <div class="tl-role">Graphic Designer & Video Editor</div>
+        <div class="tl-co">ExpressNewz</div>
+        <div class="tl-desc">Social media posters, festival campaigns, and video content for a fast-paced news platform.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2022 — 2023</div>
+        <div class="tl-role">Visual Designer</div>
+        <div class="tl-co">VG College</div>
+        <div class="tl-desc">Complete print design ecosystem — admission posters, flyers, banners, and brochures.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2021 — 2022</div>
+        <div class="tl-role">Motion & Brand Designer</div>
+        <div class="tl-co">AIT — Academy for Innovation in Technology</div>
+        <div class="tl-desc">Social media campaigns, motion graphics, and full branding material development.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SKILLS
+══════════════════════════════════════ -->
+<section id="skills">
+  <div class="blob blob-c" style="width:42vw;height:42vw;top:0;left:-18%;opacity:.2" aria-hidden="true"></div>
+  <div class="s-label rv"><span>02</span>Skills & Tools</div>
+  <h2 class="s-title rv">Crafted with the<br><span class="gpi">right tools.</span></h2>
+  <p class="skills-lead rv">Each tool in my arsenal serves a purpose — together they form a complete creative workflow from concept to delivery.</p>
+  <div class="tools-grid" id="toolsGrid"></div>
+  <h3 class="rv" style="font-size:1.1rem;font-weight:700;margin-bottom:1.8rem;letter-spacing:-.02em">Proficiency Levels</h3>
+  <div class="skill-rows rv" id="skillRows"></div>
+</section>
+
+<!-- ══════════════════════════════════════
+     EXPERIENCE
+══════════════════════════════════════ -->
+<section id="experience">
+  <div class="blob blob-k" style="width:40vw;height:40vw;top:-10%;right:-12%;opacity:.2" aria-hidden="true"></div>
+  <div class="s-label rv"><span>03</span>Experience</div>
+  <h2 class="s-title rv">Where I've<br><span class="gp">made an impact.</span></h2>
+  <div class="exp-grid" id="expGrid"></div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PORTFOLIO — MASONRY, NATURAL SIZES
+══════════════════════════════════════ -->
+<section id="portfolio">
+  <div class="blob blob-p" style="width:35vw;height:35vw;bottom:-10%;left:-8%;opacity:.18" aria-hidden="true"></div>
+  <div class="s-label rv"><span>04</span>Portfolio</div>
+  <h2 class="s-title rv">All<br><span class="gpi">Designs.</span></h2>
+
+  <div class="port-filters rv" role="group" aria-label="Filter">
+    <button class="f-btn active" data-f="all">All Designs</button>
+    <button class="f-btn" data-f="poster">Posters</button>
+    <button class="f-btn" data-f="flyer">Flyers</button>
+    <button class="f-btn" data-f="banner">Banners</button>
+    <button class="f-btn" data-f="social">Social Media</button>
+    <button class="f-btn" data-f="brochure">Brochures</button>
+    <button class="f-btn" data-f="logo">Logo / Brand</button>
+  </div>
+
+  <!--
+    ════════════════════════════════════════
+    HOW TO ADD YOUR OWN DESIGNS:
+    Replace the canvas inside each .p-item
+    with: <img src="your-image.jpg" alt="Description">
+    The masonry layout will respect the
+    natural height of each image automatically.
+    ════════════════════════════════════════
+  -->
+  <div class="port-masonry" id="portMasonry"></div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CONTACT
+══════════════════════════════════════ -->
+<section id="contact">
+  <div class="blob blob-c" style="width:40vw;height:40vw;top:-10%;left:15%;opacity:.2" aria-hidden="true"></div>
+  <div class="s-label rv" style="justify-content:center"><span>05</span>Get In Touch</div>
+  <h2 class="contact-big rv">Let's create<br><span class="gp">together.</span></h2>
+
+  <div class="c-info-row rv">
+    <div class="c-info">
+      <span class="c-info-label">Phone</span>
+      <a href="tel:+9779804338339" class="c-info-val">+977 9804338339</a>
+    </div>
+    <div class="c-info">
+      <span class="c-info-label">Email</span>
+      <a href="mailto:anishchy23@gmail.com" class="c-info-val">anishchy23@gmail.com</a>
+    </div>
+    <div class="c-info">
+      <span class="c-info-label">Location</span>
+      <span class="c-info-val">Kathmandu, Nepal</span>
+    </div>
+  </div>
+
+  <div class="glass c-form-card rv">
+    <!--
+      Email delivery powered by FormSubmit.co — no backend required.
+      IMPORTANT: On FIRST submit, FormSubmit will send a confirmation
+      email to anishchy23@gmail.com. Click "Confirm" in that email
+      to activate. All subsequent submissions will deliver instantly.
+    -->
+    <form id="cForm" novalidate>
+      <!-- FormSubmit hidden config -->
+      <input type="hidden" name="_subject" value="New Portfolio Inquiry — Anish Chaudhary">
+      <input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_captcha" value="false">
+
+      <div class="f-row">
+        <div class="f-field">
+          <input type="text" id="fn" name="first_name" placeholder=" " autocomplete="given-name" required>
+          <label class="f-label" for="fn">First Name</label>
+        </div>
+        <div class="f-field">
+          <input type="text" id="ln" name="last_name" placeholder=" " autocomplete="family-name" required>
+          <label class="f-label" for="ln">Last Name</label>
+        </div>
+      </div>
+      <div class="f-field">
+        <input type="email" id="em" name="email" placeholder=" " autocomplete="email" required>
+        <label class="f-label" for="em">Email Address</label>
+      </div>
+      <div class="f-field">
+        <input type="text" id="sb" name="subject" placeholder=" " required>
+        <label class="f-label" for="sb">Subject</label>
+      </div>
+      <div class="f-field">
+        <textarea id="msg" name="message" placeholder=" " required></textarea>
+        <label class="f-label" for="msg">Your Message</label>
+      </div>
+      <button type="submit" class="f-submit magnetic" id="fSubmit">Send Message ↗</button>
+    </form>
+  </div>
+
+  <div class="social-row rv">
+    <a href="#" class="soc" aria-label="Instagram" title="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+    <a href="#" class="soc" aria-label="Behance" title="Behance">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M0 4.5h7.5c2.1 0 4 .9 4 3.3 0 1.3-.6 2.4-1.7 2.9 1.5.4 2.6 1.5 2.6 3.5 0 2.8-2.1 4.3-4.9 4.3H0V4.5zm3 5.5h4c.9 0 1.5-.5 1.5-1.4S7.9 7.2 7 7.2H3V10zm0 5.8h4.3c1.1 0 1.8-.6 1.8-1.6s-.7-1.6-1.8-1.6H3v3.2zM16 9h5v1.5h-5V9zm-1 4.5c0-2.9 2-5 5-5 3.1 0 4.9 2.1 4.9 5v.8h-7c.2 1.3 1.1 2 2.4 2 .8 0 1.6-.4 1.9-1.1h2.5c-.5 1.9-2.2 3.1-4.4 3.1-3 0-5.3-2-5.3-4.8zm7.5-1.2c-.2-1.1-.9-1.8-2.2-1.8s-2 .8-2.3 1.8h4.5z"/>
+      </svg>
+    </a>
+    <a href="#" class="soc" aria-label="Dribbble" title="Dribbble">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/>
+      </svg>
+    </a>
+    <a href="#" class="soc" aria-label="LinkedIn" title="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+        <circle cx="4" cy="4" r="2"/>
+      </svg>
+    </a>
+    <a href="https://wa.me/9779804338339" class="soc" aria-label="WhatsApp" title="WhatsApp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────── -->
+<footer>
+  <div class="ft-logo">Anish Chaudhary</div>
+  <div class="ft-copy">Designed &amp; Developed by Anish Chaudhary © 2025</div>
+  <div class="ft-avail">Available for work</div>
+</footer>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+/* ─── DATA ─────────────────────── */
+const TOOLS = [
+  {icon:'🎨', name:'Photoshop',    lvl:'Expert',       pct:95},
+  {icon:'🖌️', name:'Illustrator',  lvl:'Expert',       pct:92},
+  {icon:'📐', name:'Canva',        lvl:'Advanced',     pct:90},
+  {icon:'📦', name:'CorelDRAW',    lvl:'Advanced',     pct:85},
+  {icon:'🎬', name:'CapCut',       lvl:'Advanced',     pct:88},
+  {icon:'🎞️', name:'Premiere Pro', lvl:'Intermediate', pct:78},
+];
+
+const EXP = [
+  {no:'01', co:'ExpressNewz', role:'Graphic Designer & Video Editor',
+   tasks:['Social media poster design for daily news','Festival poster campaigns & event graphics','Video editing & motion content production','Breaking news visual templates & systems'],
+   col:'#7c3aed'},
+  {no:'02', co:'VG College',  role:'Visual Designer',
+   tasks:['Admission campaign poster design','Promotional flyers for multiple programs','Indoor & outdoor banner systems','Brochure design & print production'],
+   col:'#0891b2'},
+  {no:'03', co:'AIT',         role:'Motion & Brand Designer',
+   tasks:['Social media design system & templates','Motion graphics for digital campaigns','Branding material development','Visual identity guidelines'],
+   col:'#db2777'},
+];
+
+const MQ = [
+  {t:'Graphic Design',hi:true},{t:'Brand Identity'},{t:'Motion Graphics',hi:true},
+  {t:'Video Editing'},{t:'Social Media Design',hi:true},{t:'Festival Posters'},
+  {t:'Branding',hi:true},{t:'Print Design'},{t:'Typography',hi:true},{t:'Art Direction'},
+];
+
+/*
+  ─── PORTFOLIO ITEMS ────────────────────────────
+  Each item has:
+    cat    : category for filter ('poster','flyer','banner','social','brochure','logo')
+    label  : display label
+    name   : project title
+    aspect : canvas aspect ratio [width, height] simulating real design dimensions
+    colors : [bg, primary accent, secondary accent]
+
+  TO USE YOUR OWN IMAGES: replace the canvas with
+  <img src="path/to/your/design.jpg" alt="...">
+  inside the .p-item element.
+*/
+const PORT = [
+  /* POSTERS (portrait / tall) */
+  {cat:'poster',   label:'Poster',      name:'ExpressNewz Dashain Festival',     aspect:[2480,3508], bg:'#1a0030', c1:'#c084fc', c2:'#f0abfc'},
+  {cat:'poster',   label:'Poster',      name:'New Year Celebration Poster',      aspect:[2480,3508], bg:'#001233', c1:'#38bdf8', c2:'#7dd3fc'},
+  {cat:'poster',   label:'Poster',      name:'AIT Tech Summit Poster',           aspect:[2480,3508], bg:'#0f172a', c1:'#818cf8', c2:'#c7d2fe'},
+  /* SOCIAL MEDIA (square) */
+  {cat:'social',   label:'Social Media', name:'ExpressNewz Daily Post',          aspect:[1080,1080], bg:'#042f2e', c1:'#34d399', c2:'#6ee7b7'},
+  {cat:'social',   label:'Social Media', name:'AIT Course Announcement',         aspect:[1080,1080], bg:'#1e1b4b', c1:'#a78bfa', c2:'#ddd6fe'},
+  {cat:'social',   label:'Social Media', name:'VG College Admission Post',       aspect:[1080,1080], bg:'#450a0a', c1:'#fca5a5', c2:'#fecaca'},
+  {cat:'social',   label:'Social Media', name:'Tihar Festival Post',             aspect:[1080,1080], bg:'#1c1917', c1:'#fbbf24', c2:'#fde68a'},
+  {cat:'social',   label:'Social Media', name:'Republic Day Special',            aspect:[1080,1080], bg:'#052e16', c1:'#4ade80', c2:'#bbf7d0'},
+  /* FLYERS (A5 portrait) */
+  {cat:'flyer',    label:'Flyer',        name:'VG College Admission Flyer',      aspect:[1748,2480], bg:'#0c0a3e', c1:'#818cf8', c2:'#e0e7ff'},
+  {cat:'flyer',    label:'Flyer',        name:'AIT Workshop Flyer',              aspect:[1748,2480], bg:'#0f172a', c1:'#06b6d4', c2:'#a5f3fc'},
+  /* BANNERS (wide) */
+  {cat:'banner',   label:'Banner',       name:'VG College Outdoor Billboard',    aspect:[5000,2000], bg:'#020617', c1:'#6366f1', c2:'#a5b4fc'},
+  {cat:'banner',   label:'Banner',       name:'ExpressNewz Web Banner',          aspect:[1200,400],  bg:'#1e1b4b', c1:'#c4b5fd', c2:'#ede9fe'},
+  {cat:'banner',   label:'Banner',       name:'AIT Digital Banner',              aspect:[1200,628],  bg:'#0f172a', c1:'#38bdf8', c2:'#bae6fd'},
+  /* BROCHURES (landscape) */
+  {cat:'brochure', label:'Brochure',     name:'VG College Tri-fold Brochure',    aspect:[3508,2480], bg:'#0c0a3e', c1:'#a78bfa', c2:'#ede9fe'},
+  {cat:'brochure', label:'Brochure',     name:'AIT Program Brochure',            aspect:[3508,2480], bg:'#0f172a', c1:'#34d399', c2:'#a7f3d0'},
+  /* LOGO / BRAND */
+  {cat:'logo',     label:'Logo',         name:'ExpressNewz Brand Identity',      aspect:[2000,2000], bg:'#1e1b4b', c1:'#f0abfc', c2:'#fae8ff'},
+  {cat:'logo',     label:'Logo',         name:'AIT Logo & Brand Manual',         aspect:[2000,2000], bg:'#0f172a', c1:'#818cf8', c2:'#e0e7ff'},
+];
+
+/* ─── PRELOADER ──────────────── */
+(function(){
+  const fill=document.getElementById('plFill');
+  const pct =document.getElementById('plPct');
+  const st  =document.getElementById('plStatus');
+  const msgs=['Initializing experience','Loading creative assets','Almost ready'];
+  let n=0;
+  const iv=setInterval(()=>{
+    n=Math.min(n+Math.random()*3.8+1.2,100);
+    fill.style.width=n+'%';
+    pct.textContent=Math.round(n)+'%';
+    if(n>33) st.textContent=msgs[1];
+    if(n>66) st.textContent=msgs[2];
+    if(n>=100){
+      clearInterval(iv);fill.style.width='100%';pct.textContent='100%';
+      setTimeout(()=>{
+        gsap.to(['.pl-name','.pl-sub','.pl-bar-wrap','.pl-status'],{opacity:0,duration:.3});
+        gsap.to(['#doorL','#doorR'],{
+          scaleX:0,duration:.85,ease:'power4.inOut',stagger:.05,
+          onComplete:()=>{document.getElementById('preloader').style.display='none';boot();}
+        });
+      },350);
+    }
+  },46);
+})();
+
+/* ─── CURSOR ─────────────────── */
+function initCursor(){
+  const ring=document.getElementById('cur-ring');
+  const dot =document.getElementById('cur-dot');
+  const lbl =document.getElementById('cur-lbl');
+  let ox=-200,oy=-200,mx=-200,my=-200;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
+  (function lerp(){
+    ox+=(mx-ox)*.1;oy+=(my-oy)*.1;
+    ring.style.left=ox+'px';ring.style.top=oy+'px';
+    dot.style.left=mx+'px';dot.style.top=my+'px';
+    lbl.style.left=ox+'px';lbl.style.top=oy+'px';
+    requestAnimationFrame(lerp);
+  })();
+  document.querySelectorAll('a,button,.tool-card,.exp-card,.badge').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('c-hover'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('c-hover'));
+  });
+  document.querySelectorAll('.p-item').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{document.body.classList.remove('c-hover');document.body.classList.add('c-view');});
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('c-view'));
+  });
+}
+
+/* ─── DARK MODE TOGGLE ──────── */
+function initTheme(){
+  const btn=document.getElementById('theme-toggle');
+  const html=document.documentElement;
+  let dark=false;
+  btn.addEventListener('click',()=>{
+    dark=!dark;
+    html.setAttribute('data-theme',dark?'dark':'light');
+    btn.textContent=dark?'☀️':'🌙';
+    btn.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');
+  });
+}
+
+/* ─── THREE.JS ───────────────── */
+function initThree(){
+  const canvas=document.getElementById('three-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(innerWidth,innerHeight);
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,200);
+  cam.position.z=50;
+
+  /* particles */
+  const N=1800;
+  const pos=new Float32Array(N*3),col=new Float32Array(N*3);
+  const pal=[new THREE.Color('#7c3aed'),new THREE.Color('#0891b2'),new THREE.Color('#db2777'),new THREE.Color('#059669')];
+  for(let i=0;i<N;i++){
+    const i3=i*3;
+    pos[i3]=(Math.random()-.5)*170;pos[i3+1]=(Math.random()-.5)*105;pos[i3+2]=(Math.random()-.5)*85;
+    const c=pal[Math.floor(Math.random()*pal.length)];
+    col[i3]=c.r;col[i3+1]=c.g;col[i3+2]=c.b;
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color',   new THREE.BufferAttribute(col,3));
+  const mat=new THREE.PointsMaterial({size:.5,vertexColors:true,transparent:true,opacity:.55,sizeAttenuation:true});
+  scene.add(new THREE.Points(geo,mat));
+
+  /* wireframes */
+  function wm(c,o){return new THREE.MeshBasicMaterial({color:c,wireframe:true,transparent:true,opacity:o})}
+  const torus=new THREE.Mesh(new THREE.TorusGeometry(14,.25,14,80),wm('#7c3aed',.07));
+  const ico  =new THREE.Mesh(new THREE.IcosahedronGeometry(8,1),wm('#0891b2',.06));
+  const oct  =new THREE.Mesh(new THREE.OctahedronGeometry(5),wm('#db2777',.07));
+  ico.position.set(18,-7,-10);oct.position.set(-20,9,-8);
+  scene.add(torus,ico,oct);
+
+  let tx=0,ty=0;
+  document.addEventListener('mousemove',e=>{tx=(e.clientX/innerWidth-.5)*.8;ty=(e.clientY/innerHeight-.5)*.5;},{passive:true});
+  window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();});
+
+  (function tick(t){
+    requestAnimationFrame(tick);const s=t*.001;
+    scene.children[0].rotation.y=s*.055;scene.children[0].rotation.x=s*.018;
+    torus.rotation.x=s*.13;torus.rotation.y=s*.09;
+    ico.rotation.y=s*.18;ico.rotation.x=s*.12;
+    oct.rotation.x=s*.22;oct.rotation.z=s*.15;
+    cam.position.x+=(tx*5-cam.position.x)*.05;
+    cam.position.y+=(-ty*4-cam.position.y)*.05;
+    cam.lookAt(scene.position);
+    renderer.render(scene,cam);
+  })(0);
+}
+
+/* ─── NAV: NONE — no nav bar ─── */
+
+/* ─── HERO ENTRANCE ──────────── */
+function heroIn(){
+  const words=document.querySelectorAll('.hero-h1 .wd');
+  gsap.timeline({delay:.15})
+    .to(words,{y:0,duration:1.1,ease:'power4.out',stagger:.07})
+    .to('#heroEye',{opacity:1,y:0,duration:.7},'-=.5')
+    .to('#heroRoles',{opacity:1,duration:.5},'-=.3')
+    .to('#heroCtas',{opacity:1,y:0,duration:.55},'-=.3')
+    .to('#heroStats',{opacity:1,y:0,duration:.55},'-=.3')
+    .to('.scroll-hint',{opacity:1,duration:.5},'-=.2');
+}
+
+/* ─── SCROLL REVEAL ──────────── */
+function initReveal(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.1});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+}
+
+/* ─── COUNTER ANIM ───────────── */
+function initCounters(){
+  document.querySelectorAll('.hs-num[data-c]').forEach(el=>{
+    const target=+el.dataset.c;
+    const io=new IntersectionObserver(e=>{
+      if(e[0].isIntersecting){
+        gsap.to({v:0},{v:target,duration:1.8,ease:'power2.out',
+          onUpdate:function(){el.textContent=Math.round(this.targets()[0].v)+(target>=10?'+':'');}});
+        io.disconnect();
+      }
+    },{threshold:.5});
+    io.observe(el);
+  });
+}
+
+/* ─── MAGNETIC BUTTONS ───────── */
+function initMagnetic(){
+  document.querySelectorAll('.magnetic').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{
+      const r=btn.getBoundingClientRect();
+      gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.38,y:(e.clientY-r.top-r.height/2)*.38,duration:.35});
+    });
+    btn.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:.55,ease:'elastic.out(1,.5)'}));
+  });
+}
+
+/* ─── MARQUEE ────────────────── */
+function buildMarquee(){
+  function row(id,items){
+    const el=document.getElementById(id);
+    const html=items.map(it=>`<span class="mq-item${it.hi?' hi':''}">${it.t}</span><span class="mq-dot">✦</span>`).join('');
+    el.innerHTML=html+html;
+  }
+  row('mq1',MQ);
+  row('mq2',[...MQ].reverse());
+}
+
+/* ─── TOOLS BUILD ────────────── */
+function buildTools(){
+  const grid=document.getElementById('toolsGrid');
+  const rows=document.getElementById('skillRows');
+  TOOLS.forEach((t,i)=>{
+    const card=document.createElement('div');
+    card.className='tool-card glass rv';
+    card.style.transitionDelay=(i*.06)+'s';
+    card.innerHTML=`
+      <div class="tc-icon">${t.icon}</div>
+      <div class="tc-name">${t.name}</div>
+      <div class="tc-lvl">${t.lvl}</div>
+      <div class="tc-bar-track"><div class="tc-bar-fill" data-p="${t.pct}"></div></div>`;
+    grid.appendChild(card);
+    const row=document.createElement('div');
+    row.className='sk-row';
+    row.innerHTML=`<div class="sk-name">${t.name}</div><div class="sk-track"><div class="sk-fill" data-p="${t.pct}"></div></div><div class="sk-pct">${t.pct}%</div>`;
+    rows.appendChild(row);
+  });
+  const io=new IntersectionObserver(e=>{
+    if(e[0].isIntersecting){
+      document.querySelectorAll('.tc-bar-fill,.sk-fill').forEach(b=>b.style.width=b.dataset.p+'%');
+      io.disconnect();
+    }
+  },{threshold:.2});
+  io.observe(rows);
+}
+
+/* ─── EXPERIENCE ─────────────── */
+function buildExp(){
+  const grid=document.getElementById('expGrid');
+  EXP.forEach((e,i)=>{
+    const card=document.createElement('div');
+    card.className='exp-card glass rv';
+    card.style.transitionDelay=(i*.1)+'s';
+    card.innerHTML=`
+      <div class="exp-no">${e.no}</div>
+      <div class="exp-co">${e.co}</div>
+      <div class="exp-role">${e.role}</div>
+      <ul class="exp-list">${e.tasks.map(t=>`<li>${t}</li>`).join('')}</ul>
+      <div class="exp-glow" style="background:radial-gradient(${e.col},transparent 70%);position:absolute;bottom:-50px;right:-50px;width:120px;height:120px;border-radius:50%;opacity:.15"></div>`;
+    grid.appendChild(card);
+  });
+}
+
+/* ─── PORTFOLIO MASONRY ──────── */
+function buildPortfolio(){
+  const masonry=document.getElementById('portMasonry');
+  PORT.forEach((item,idx)=>{
+    const wrap=document.createElement('div');
+    wrap.className='p-item glass rv';
+    wrap.dataset.cat=item.cat;
+    wrap.style.transitionDelay=(idx*.04)+'s';
+    wrap.innerHTML=`
+      <div class="p-overlay">
+        <div class="p-cat">${item.label}</div>
+        <div class="p-name">${item.name}</div>
+        <div class="p-view">Click to view ↗</div>
+      </div>`;
+    masonry.appendChild(wrap);
+    /* Draw canvas at correct aspect ratio after paint */
+    setTimeout(()=>drawDesign(wrap,item),50+idx*8);
+  });
+
+  /* Filter */
+  document.querySelectorAll('.f-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f=btn.dataset.f;
+      document.querySelectorAll('.p-item').forEach(it=>{
+        const show=f==='all'||it.dataset.cat===f;
+        it.style.display=show?'block':'none';
+      });
+    });
+  });
+}
+
+/* Draw a canvas thumbnail preserving real design aspect ratio */
+function drawDesign(wrap,item){
+  const [dw,dh]=item.aspect;
+  const displayW=wrap.offsetWidth||300;
+  const displayH=Math.round(displayW*(dh/dw)); /* maintain real aspect ratio */
+
+  const cvs=document.createElement('canvas');
+  cvs.width=displayW*2; /* retina */
+  cvs.height=displayH*2;
+  cvs.style.width='100%';
+  cvs.style.height=displayH+'px';
+
+  const ctx=cvs.getContext('2d');
+  ctx.scale(2,2);
+  const W=displayW,H=displayH;
+
+  /* Background */
+  ctx.fillStyle=item.bg;ctx.fillRect(0,0,W,H);
+
+  /* Gradient wash */
+  const g=ctx.createLinearGradient(0,0,W,H);
+  g.addColorStop(0,item.c1+'33');g.addColorStop(1,item.c2+'22');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+
+  /* Design-category specific art */
+  const cat=item.cat;
+  if(cat==='poster'||cat==='flyer'){
+    /* Portrait: decorative vertical layout */
+    blob2(ctx,W*.5,H*.3,H*.35,item.c1+'44');
+    blob2(ctx,W*.2,H*.7,H*.2,item.c2+'33');
+    drawLines(ctx,W,H,item.c1,true);
+    geoRing(ctx,W*.5,H*.32,H*.2,item.c1+'88');
+    textBlock(ctx,W,H,item.name,item.c1,item.c2,H*.062,H*.06);
+  } else if(cat==='social'){
+    /* Square: centered bold */
+    blob2(ctx,W*.5,H*.5,H*.55,item.c1+'44');
+    dotGrid2(ctx,W,H,item.c2);
+    geoRing(ctx,W*.5,H*.42,H*.3,item.c1+'77');
+    textBlock(ctx,W,H,item.name,item.c1,item.c2,H*.09,H*.078);
+  } else if(cat==='banner'){
+    /* Wide: horizontal layout */
+    blob2(ctx,W*.2,H*.5,H*.8,item.c1+'44');
+    blob2(ctx,W*.85,H*.5,H*.6,item.c2+'33');
+    drawLines(ctx,W,H,item.c1,false);
+    textBlock(ctx,W,H,item.name,item.c1,item.c2,H*.16,H*.14);
+  } else if(cat==='brochure'){
+    /* Landscape: tri-fold lines */
+    [W*.33,W*.66].forEach(x=>{
+      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);
+      ctx.strokeStyle=item.c1+'22';ctx.lineWidth=1;ctx.stroke();
+    });
+    blob2(ctx,W*.16,H*.5,H*.6,item.c1+'33');
+    blob2(ctx,W*.84,H*.5,H*.5,item.c2+'28');
+    textBlock(ctx,W,H,item.name,item.c1,item.c2,H*.1,H*.09);
+  } else if(cat==='logo'){
+    /* Square: logo presentation */
+    blob2(ctx,W*.5,H*.5,H*.55,item.c1+'44');
+    initials(ctx,W,H,item.name,item.c1,item.c2);
+  }
+
+  /* Glass shimmer at top */
+  const shimmer=ctx.createLinearGradient(0,0,W*.6,H*.3);
+  shimmer.addColorStop(0,'rgba(255,255,255,.04)');shimmer.addColorStop(1,'transparent');
+  ctx.fillStyle=shimmer;ctx.fillRect(0,0,W,H);
+
+  /* Category pill */
+  ctx.fillStyle='rgba(0,0,0,.45)';
+  ctx.beginPath();
+  if(ctx.roundRect)ctx.roundRect(12,12,60,18,99);
+  else ctx.rect(12,12,60,18);
+  ctx.fill();
+  ctx.font=`600 9px Poppins,sans-serif`;
+  ctx.fillStyle=item.c1;ctx.textAlign='left';ctx.textBaseline='middle';
+  ctx.fillText(item.label.toUpperCase(),20,21);
+
+  wrap.prepend(cvs);
+}
+
+/* Canvas helper functions */
+function blob2(ctx,x,y,r,col){
+  const g=ctx.createRadialGradient(x,y,0,x,y,r);
+  g.addColorStop(0,col);g.addColorStop(1,'transparent');
+  ctx.fillStyle=g;ctx.fillRect(x-r,y-r,r*2,r*2);
+}
+function geoRing(ctx,cx,cy,r,col){
+  for(let i=0;i<3;i++){
+    ctx.beginPath();ctx.arc(cx,cy,r*(1-i*.18),0,Math.PI*2);
+    ctx.strokeStyle=col;ctx.lineWidth=1-i*.2;ctx.stroke();
+  }
+  for(let i=0;i<6;i++){
+    const a=i/6*Math.PI*2-Math.PI/6;
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+Math.cos(a)*r*.8,cy+Math.sin(a)*r*.8);
+    ctx.strokeStyle=col;ctx.lineWidth=.7;ctx.stroke();
+  }
+}
+function dotGrid2(ctx,W,H,col){
+  for(let x=W/8;x<W;x+=W/8)for(let y=H/8;y<H;y+=H/8){
+    const d=Math.sqrt((x-W*.5)**2+(y-H*.5)**2)/(Math.max(W,H)*.65);
+    ctx.beginPath();ctx.arc(x,y,1.2,0,Math.PI*2);
+    ctx.fillStyle=col+Math.floor(Math.max(0,.6-d)*60).toString(16).padStart(2,'0');ctx.fill();
+  }
+}
+function drawLines(ctx,W,H,col,vert){
+  for(let i=1;i<5;i++){
+    ctx.beginPath();
+    if(vert){ctx.moveTo(W/5*i,0);ctx.lineTo(W/5*i,H);}
+    else{ctx.moveTo(0,H/4*i);ctx.lineTo(W,H/4*i);}
+    ctx.strokeStyle=col+'18';ctx.lineWidth=1;ctx.stroke();
+  }
+}
+function textBlock(ctx,W,H,name,c1,c2,mainSz,subSz){
+  ctx.textAlign='center';ctx.textBaseline='bottom';
+  /* dark backdrop */
+  const bh=mainSz*3.5;
+  const bg=ctx.createLinearGradient(0,H-bh-10,0,H);
+  bg.addColorStop(0,'transparent');bg.addColorStop(1,'rgba(0,0,0,.65)');
+  ctx.fillStyle=bg;ctx.fillRect(0,H-bh-10,W,bh+10);
+  /* main label */
+  const words=name.split(' ');
+  const top=words.slice(0,-2).join(' ');
+  const bottom=words.slice(-2).join(' ');
+  ctx.font=`700 ${mainSz}px Poppins,sans-serif`;
+  ctx.fillStyle='#fff';
+  ctx.fillText(bottom||name,W*.5,H-mainSz*.4);
+  if(top){
+    ctx.font=`400 ${subSz*.85}px Poppins,sans-serif`;
+    ctx.fillStyle=c1;
+    ctx.fillText(top,W*.5,H-mainSz*1.5);
+  }
+}
+function initials(ctx,W,H,name,c1,c2){
+  /* Logotype mockup */
+  const words=name.split(' ');
+  const initLtr=words.map(w=>w[0]).slice(0,2).join('');
+  const sz=Math.min(W,H)*.28;
+  /* circle bg */
+  const g=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,sz*.9);
+  g.addColorStop(0,c1+'55');g.addColorStop(1,'transparent');
+  ctx.fillStyle=g;ctx.fillRect(W/2-sz,H/2-sz,sz*2,sz*2);
+  /* initials */
+  ctx.font=`800 ${sz}px Poppins,sans-serif`;
+  ctx.fillStyle=c1;ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(initLtr,W/2,H*.42);
+  /* full name below */
+  ctx.font=`500 ${sz*.2}px Poppins,sans-serif`;
+  ctx.fillStyle='rgba(255,255,255,.55)';
+  ctx.fillText(name.split(' ').slice(0,2).join(' ').toUpperCase(),W/2,H*.66);
+  ctx.font=`400 ${sz*.14}px Poppins,sans-serif`;
+  ctx.fillStyle=c2;
+  ctx.fillText('BRAND IDENTITY',W/2,H*.75);
+}
+
+/* ─── CONTACT FORM ───────────── */
+function initForm(){
+  const form  =document.getElementById('cForm');
+  const submit=document.getElementById('fSubmit');
+
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    submit.textContent='Sending…';submit.style.opacity='.65';
+
+    /* Build form data for FormSubmit.co */
+    const data=new FormData();
+    data.append('first_name', document.getElementById('fn').value);
+    data.append('last_name',  document.getElementById('ln').value);
+    data.append('email',      document.getElementById('em').value);
+    data.append('subject',    document.getElementById('sb').value);
+    data.append('message',    document.getElementById('msg').value);
+    data.append('_subject',   'New Portfolio Inquiry — Anish Chaudhary');
+    data.append('_template',  'box');
+    data.append('_captcha',   'false');
+
+    try{
+      const res=await fetch('https://formsubmit.co/ajax/anishchy23@gmail.com',{
+        method:'POST',
+        headers:{'Accept':'application/json'},
+        body:data
+      });
+      const json=await res.json();
+      if(res.ok && json.success==='true'){
+        form.reset();
+        showSuccess();
+      } else {
+        throw new Error('Form error');
+      }
+    } catch(err){
+      /* fallback: still show success UI + open mailto */
+      showSuccess();
+      window.location.href=`mailto:anishchy23@gmail.com?subject=${encodeURIComponent(document.getElementById('sb').value)}&body=${encodeURIComponent(document.getElementById('msg').value)}`;
+    }
+
+    submit.textContent='Send Message ↗';submit.style.opacity='1';
+  });
+}
+
+function showSuccess(){
+  const ov=document.getElementById('success-overlay');
+  ov.classList.add('show');
+  /* auto-close after 3s */
+  setTimeout(()=>{
+    ov.style.transition='opacity .4s';
+    ov.style.opacity='0';
+    setTimeout(()=>{ov.classList.remove('show');ov.style.opacity='';},420);
+  },3100);
+}
+
+/* ─── PARALLAX BLOBS ─────────── */
+function initParallax(){
+  window.addEventListener('scroll',()=>{
+    const y=scrollY;
+    document.querySelectorAll('.blob').forEach((b,i)=>{
+      b.style.transform=`translateY(${y*(i%2===0?-.04:.03)}px)`;
+    });
+  },{passive:true});
+}
+
+/* ─── BOOT ───────────────────── */
+function boot(){
+  gsap.registerPlugin(ScrollTrigger);
+  initThree();
+  initCursor();
+  initTheme();
+  heroIn();
+  buildMarquee();
+  buildTools();
+  buildExp();
+  buildPortfolio();
+  initReveal();
+  initMagnetic();
+  initCounters();
+  initForm();
+  initParallax();
+}
+</script>
+</body>
+</html>
